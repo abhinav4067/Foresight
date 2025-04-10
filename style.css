@@ -25,8 +25,8 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
-  /* background-color: white;
-  color: #0a0a0a; */
+  background-color: white;
+  color: #0a0a0a;
 }
 
 .container {
@@ -46,7 +46,7 @@ body {
 
 @media (max-width: 600px) {
   .logo-img-absolute {
-    top: 1.4rem; /* Override for mobile */
+    top: 0.3rem; /* Override for mobile */
   }
 }
 
