@@ -25,8 +25,8 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
-  background-color: white;
-  color: #0a0a0a;
+  /* background-color: white;
+  color: #0a0a0a; */
 }
 
 .container {
@@ -37,12 +37,19 @@ body {
 
 /* This is the KEY: logo is OUTSIDE blending context */
 .logo-img-absolute {
-  position: fixed;   /* not absolute */
-  top: 0.3rem;
+  position: fixed;
+  top: 0.4rem; /* Default for laptop */
   left: 1rem;
-  z-index: 1001; /* must be above navbar */
-  pointer-events: none; /* makes sure it doesn’t interfere with click/tap */
+  z-index: 1001;
+  pointer-events: none;
 }
+
+@media (max-width: 600px) {
+  .logo-img-absolute {
+    top: 1.4rem; /* Override for mobile */
+  }
+}
+
 
 .logo-img-absolute img {
   width: 50px;
