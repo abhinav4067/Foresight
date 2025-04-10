@@ -1,50 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // ✅ Form Submission
-  const contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("Thank you! Your message has been sent.");
-      this.reset();
-    });
-  }
-
-  // ✅ Menu Toggle
+// Simple form submission alert
+document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("Thank you! Your message has been sent.");
+    this.reset();
+  });
+  
   const menuToggle = document.getElementById("menu-toggle");
-  const menuClose = document.getElementById("menu-close");
+
+  menuToggle.addEventListener("click", function () {
+    console.log("Menu toggle clicked ✅");
+    // Your existing toggle logic here...
+  });
+    const menuClose = document.getElementById("menu-close");
   const navLinks = document.getElementById("nav-links");
-  const socialSidebar = document.querySelector(".social-sidebar"); // 👉 Moved inside
 
-  if (menuToggle && menuClose && navLinks) {
-    menuToggle.addEventListener("click", function () {
-      console.log("Menu toggle clicked ✅");
-      navLinks.classList.add("active");
-      socialSidebar?.classList.add("move-left"); // 👈 Move to left
-    });
+  // Open menu
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.add("active");
+  });
 
-    menuClose.addEventListener("click", () => {
+  // Close menu with close icon
+  menuClose.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+  });
+
+  // Close menu when a nav link is clicked
+  document.querySelectorAll("#nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
       navLinks.classList.remove("active");
-      socialSidebar?.classList.remove("move-left"); // 👈 Back to right
     });
+  });
 
-    document.querySelectorAll("#nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-        socialSidebar?.classList.remove("move-left");
-      });
-    });
+  // Close menu when clicking outside
+  document.addEventListener("click", (event) => {
+    const isClickInside = navLinks.contains(event.target) || menuToggle.contains(event.target);
+    if (!isClickInside && navLinks.classList.contains("active")) {
+      navLinks.classList.remove("active");
+    }
+  });
 
-    document.addEventListener("click", (event) => {
-      const isClickInside = navLinks.contains(event.target) || menuToggle.contains(event.target);
-      if (!isClickInside && navLinks.classList.contains("active")) {
-        navLinks.classList.remove("active");
-        socialSidebar?.classList.remove("move-left");
-      }
-    });
-  }
 
-  // ✅ Scroll + Auto-scroll
+// scroll + auto-scroll
+document.addEventListener("DOMContentLoaded", () => {
   const scrollContainer = document.getElementById("scroll-container");
+
   const scrollLeftBtn = document.getElementById("scroll-left");
   const scrollRightBtn = document.getElementById("scroll-right");
 
@@ -99,29 +98,29 @@ document.addEventListener("DOMContentLoaded", () => {
     temporarilyPauseAutoScroll();
   });
 
+  // Pause auto-scroll on hover/touch
   ["mouseenter", "touchstart"].forEach(evt =>
-    scrollContainer?.addEventListener(evt, () => {
+    scrollContainer.addEventListener(evt, () => {
       isPaused = true;
     }, { passive: true })
   );
 
   ["mouseleave", "touchend"].forEach(evt =>
-    scrollContainer?.addEventListener(evt, () => {
+    scrollContainer.addEventListener(evt, () => {
       isPaused = false;
     }, { passive: true })
   );
 
+  // Start auto-scroll after load
   window.addEventListener("load", () => {
     setTimeout(() => {
       startAutoScroll();
     }, 500);
   });
 
+  // Restart on resize
   window.addEventListener("resize", () => {
     stopAutoScroll();
     startAutoScroll();
   });
 });
-
-
-
